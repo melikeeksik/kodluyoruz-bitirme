@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "461150938772",
+    "firebase_url": "https://kodluyoruz-e4172.firebaseio.com",
+    "project_id": "kodluyoruz-e4172",
+    "storage_bucket": "kodluyoruz-e4172.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:461150938772:android:a327d0d3ab321608aa3681",
+        "android_client_info": {
+          "package_name": "com.pets"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "461150938772-5fmjlmmir6066ii9f8pua8mjqutsmsa2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuIaP99ZgXu5bIEVvFOGPxuiTIsCDm7FI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "461150938772-5fmjlmmir6066ii9f8pua8mjqutsmsa2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
