@@ -4,19 +4,20 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 
-import { Login, Signup} from './Pages'
-import { Main, Profile,Messages,Blog,Forum} from "./Drawermenu";
+import { Login, Signup,SplashScreen} from './Pages'
+import { Main, Profile,Messages,Blog,Forum,Signout} from "./Drawermenu";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 function DrawerMenu() {
     return (
-        <Drawer.Navigator initialRouteName="Main">
-          <Drawer.Screen name="Main" component={Main} />
+        <Drawer.Navigator initialRouteName="Main" >
+          <Drawer.Screen name="Main" component={Main} options={{ headerShown: false}} />
           <Drawer.Screen name="Profile" component={Profile} />
           <Drawer.Screen name="Messages" component={Messages} />
           <Drawer.Screen name="Forum" component={Forum} />
           <Drawer.Screen name="Blog" component={Blog} />
+          <Drawer.Screen name="SignOut" component={Signout}/>
         </Drawer.Navigator>
     );
   }
@@ -24,7 +25,8 @@ function DrawerMenu() {
 function Router() {
     return (
         <NavigationContainer>
-            <Stack.Navigator>
+            <Stack.Navigator initialRouteName="Splashscreen">
+            <Stack.Screen name="Splashscreen" component={SplashScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
                 <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
                 <Stack.Screen name="DrawerMenu" component={DrawerMenu} options={{ headerShown: false, gestureEnabled: false}} />
