@@ -5,7 +5,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 
 
 import { Login, Signup,SplashScreen} from './Pages'
-import { Main, Profile,Messages,Blog,Forum,Signout} from "./Drawermenu";
+import { Main, Profile,Messages,Blog,Forum,Signout, AddProducts} from "./Drawermenu";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -18,6 +18,7 @@ function DrawerMenu() {
           <Drawer.Screen name="Messages" component={Messages} />
           <Drawer.Screen name="Forum" component={Forum} />
           <Drawer.Screen name="Blog" component={Blog} />
+          <Drawer.Screen name="Add Products" component={AddProducts} />
          
         </Drawer.Navigator>
     );
