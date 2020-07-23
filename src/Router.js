@@ -13,11 +13,12 @@ function DrawerMenu() {
     return (
         <Drawer.Navigator initialRouteName="Main" >
           <Drawer.Screen name="Main" component={Main} options={{ headerShown: false}} />
+          <Drawer.Screen name="SignOut" component={Signout}/>
           <Drawer.Screen name="Profile" component={Profile} />
           <Drawer.Screen name="Messages" component={Messages} />
           <Drawer.Screen name="Forum" component={Forum} />
           <Drawer.Screen name="Blog" component={Blog} />
-          <Drawer.Screen name="SignOut" component={Signout}/>
+         
         </Drawer.Navigator>
     );
   }

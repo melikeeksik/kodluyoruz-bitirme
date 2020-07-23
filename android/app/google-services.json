@@ -1,35 +1,42 @@
 {
   "project_info": {
-    "project_number": "461150938772",
-    "firebase_url": "https://kodluyoruz-e4172.firebaseio.com",
-    "project_id": "kodluyoruz-e4172",
-    "storage_bucket": "kodluyoruz-e4172.appspot.com"
+    "project_number": "674176974879",
+    "firebase_url": "https://kodluyoruzbitirme-57696.firebaseio.com",
+    "project_id": "kodluyoruzbitirme-57696",
+    "storage_bucket": "kodluyoruzbitirme-57696.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:461150938772:android:a327d0d3ab321608aa3681",
+        "mobilesdk_app_id": "1:674176974879:android:166bddf90b87fb34be552a",
         "android_client_info": {
           "package_name": "com.pets"
         }
       },
       "oauth_client": [
         {
-          "client_id": "461150938772-5fmjlmmir6066ii9f8pua8mjqutsmsa2.apps.googleusercontent.com",
+          "client_id": "674176974879-8570efg8245uh8r3o9ba14u1earjam95.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBuIaP99ZgXu5bIEVvFOGPxuiTIsCDm7FI"
+          "current_key": "AIzaSyA4i4OLpRgLM3YNZOPynzh1AUGFCuerqsI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "461150938772-5fmjlmmir6066ii9f8pua8mjqutsmsa2.apps.googleusercontent.com",
+              "client_id": "674176974879-8570efg8245uh8r3o9ba14u1earjam95.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "674176974879-42lsrhavsfb6hp72dijievcbn6f87r6o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.pets"
+              }
             }
           ]
         }
