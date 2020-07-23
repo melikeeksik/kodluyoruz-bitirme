@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   Text,
@@ -11,10 +11,55 @@ import {
 } from 'react-native';
 import {Card, ListItem, Icon} from 'react-native-elements';
 
-import auth from '@react-native-firebase/auth';
-import AsyncStorage from '@react-native-community/async-storage';
+import { SearchBar } from "../Components/MainPage";
 
 const Main = (props) => {
+  const [products, setProducts] = useState([
+    {
+      name: 'melike',
+      detail: 'ürün ücretsizdir',
+      image: 'https://reactnative.dev/img/tiny_logo.png',
+    },
+    {
+      name: 'mert',
+      detail: 'ürün ücretsizdir',
+      image: 'https://reactnative.dev/img/tiny_logo.png',
+    },
+    {
+      name: 'melike',
+      detail: 'ürün ücretsizdir',
+      image: 'https://reactnative.dev/img/tiny_logo.png',
+    },
+    {
+      name: 'mert',
+      detail: 'ürün ücretsizdir',
+      image: 'https://reactnative.dev/img/tiny_logo.png',
+    },
+  ]);
+  const [cpProducts, setcpProducts] = useState([
+    {
+      name: 'melike',
+      detail: 'ürün ücretsizdir',
+      image: 'https://reactnative.dev/img/tiny_logo.png',
+    },
+    {
+      name: 'mert',
+      detail: 'ürün ücretsizdir',
+      image: 'https://reactnative.dev/img/tiny_logo.png',
+    },
+    {
+      name: 'melike',
+      detail: 'ürün ücretsizdir',
+      image: 'https://reactnative.dev/img/tiny_logo.png',
+    },
+    {
+      name: 'mert',
+      detail: 'ürün ücretsizdir',
+      image: 'https://reactnative.dev/img/tiny_logo.png',
+    },
+  ]);
+
+  
   const Post = [
     {
       name: 'melike',
@@ -37,6 +82,17 @@ const Main = (props) => {
       image: 'https://reactnative.dev/img/tiny_logo.png',
     },
   ];
+  const searchProduts = (text) => {
+    let filteredList = cpProducts.filter(({name}) => {
+      const productData = name.toUpperCase();
+      const textData = text.toUpperCase();
+
+      return productData.indexOf(textData) > -1;
+    });
+
+    setProducts(filteredList);
+  };
+
   const renderPosts = ({item}) => {
     return (
       <Card
@@ -53,10 +109,10 @@ const Main = (props) => {
     <SafeAreaView>
       <View>
         <Text>Main Page</Text>
-
+        <SearchBar onSearch={searchProduts}/>
         <FlatList
-          keyExtractor={(item, index) => index.toString()}
-          data={Post}
+          keyExtractor={(_, index) => index.toString()}
+          data={products}
           renderItem={renderPosts}
         />
       </View>
