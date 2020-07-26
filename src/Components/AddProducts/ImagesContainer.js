@@ -5,6 +5,7 @@ import {View, StyleSheet, Text, Button, TextInput} from 'react-native';
 import {Icon} from 'react-native-elements';
 import ImagePicker from 'react-native-image-picker';
 
+import storage from '@react-native-firebase/storage';
 import database from '@react-native-firebase/database';
 
 const options = {
@@ -18,7 +19,12 @@ const options = {
 };
 
 const ImagesContainer = (props) => {
+
+//dummy variable
+const name = "xxxx"
+
   const [images, setImages] = useState([]);
+  const [imagesName, setImagesName] = useState([])
   const [description, setDescription] = useState("")
 
   const pickPhoto = () => {
@@ -33,22 +39,49 @@ const ImagesContainer = (props) => {
         let source = {uri: response.uri};
         // You can also display the image using data:
         // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-
+        let {uri} = source
+        let index = uri.indexOf("images/") + 7
+        let imageName = uri.slice(index)
+        
+        let cpArrayNames = imagesName.concat(imageName)
         let cpArray = images.concat(source);
+        
+        console.log(imageName)
+        setImagesName(cpArrayNames)
         setImages(cpArray);
       }
     });
   };
+  const uploadImage =(images) => {
+    images.forEach( async ({uri})=>{
 
-  const sendInformations = () => {
+    const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
+    const filename = uri.substring(uri.lastIndexOf('/') + 1);
+
+    console.log(uploadUri)
+    
+
+    try {
+      await storage().ref(filename).putFile(uploadUri);
+      setImages([])
+      setImagesName([])
+    } catch (e) {
+      console.error(e);
+    }
+
+    })
+  }
+
+  function sendInformations (name,imagesName,description) {
     database()
       .ref('/products')
       .push({
-        name: 'Ada Lovelace',
-        images,
-        description: {description}
+        name,
+        imagesName,
+        description
       })
       .then(() => {
+          uploadImage(images)
           setDescription("")
           setImages([])
       });
@@ -72,7 +105,9 @@ const ImagesContainer = (props) => {
           numberOfLines={10}
         />
       </View>
-      <Button title="Gönder" onPress={sendInformations}/>
+      <Button title="Gönder" onPress={()=>{
+        sendInformations(name,imagesName,description)
+      }}/>
     </View>
   );
 };
