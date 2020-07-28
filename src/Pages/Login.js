@@ -21,6 +21,8 @@ const Login = (props) => {
   const loginUser = async () => {
     try {
       await auth().signInWithEmailAndPassword(usermail, userpass);
+      setPassword("")
+      setUserMail("")
       props.navigation.navigate('DrawerMenu');
       AsyncStorage.setItem('@USER_ID', auth().currentUser.uid);
     } catch (error) {
@@ -44,6 +46,7 @@ const Login = (props) => {
           placeholder="E-posta adresinizi giriniz.."
           placeholderTextColor="white"
           onChangeText={setMail}
+          value={usermail}
           keyboardType="email-address"
           autoCapitalize="none"
         />
@@ -60,6 +63,7 @@ const Login = (props) => {
           placeholder="Şifrenizi giriniz.."
           placeholderTextColor="white"
           onChangeText={setPass}
+          value={userpass}
           secureTextEntry
         />
 

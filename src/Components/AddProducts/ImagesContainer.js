@@ -1,12 +1,13 @@
-import React, {useState} from 'react';
-import {SliderBox} from 'react-native-image-slider-box';
-import {View, StyleSheet, Text, Button, TextInput} from 'react-native';
+import React, { useState } from "react"
+import {SafeAreaView, Image, Text, Button, Alert} from "react-native"
 
-import {Icon} from 'react-native-elements';
-import ImagePicker from 'react-native-image-picker';
-
+import auth from "@react-native-firebase/auth"
+import database from "@react-native-firebase/database"
 import storage from '@react-native-firebase/storage';
-import database from '@react-native-firebase/database';
+
+import ImagePicker from 'react-native-image-picker';
+import { TextInput } from "react-native-gesture-handler";
+
 
 const options = {
   title: 'Add Products Photo',
@@ -20,17 +21,15 @@ const options = {
 
 const ImagesContainer = (props) => {
 
-//dummy variable
-const name = "xxxx"
-
-  const [images, setImages] = useState([]);
-  const [imagesName, setImagesName] = useState([])
+  const [image, setImage] = useState("https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg")
+  const [imageRef, setImageRef] = useState("")
   const [description, setDescription] = useState("")
+  const [title, setTitle] = useState("")
 
+  const userEmail = auth().currentUser.email
   const pickPhoto = () => {
     //alert('clicked');
     ImagePicker.showImagePicker(options, (response) => {
-      console.log('Response = ', response);
       if (response.didCancel) {
         console.log('User cancelled image picker');
       } else if (response.error) {
@@ -42,82 +41,68 @@ const name = "xxxx"
         let {uri} = source
         let index = uri.indexOf("images/") + 7
         let imageName = uri.slice(index)
-        
-        let cpArrayNames = imagesName.concat(imageName)
-        let cpArray = images.concat(source);
-        
-        console.log(imageName)
-        setImagesName(cpArrayNames)
-        setImages(cpArray);
+        setImage(uri)
+        setImageRef(imageName)
       }
     });
   };
-  const uploadImage =(images) => {
-    images.forEach( async ({uri})=>{
 
-    const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
-    const filename = uri.substring(uri.lastIndexOf('/') + 1);
-
-    console.log(uploadUri)
-    
-
-    try {
-      await storage().ref(filename).putFile(uploadUri);
-      setImages([])
-      setImagesName([])
-    } catch (e) {
-      console.error(e);
-    }
-
+  function uploadInformations(userEmail, imageRef, description,title){
+    database().ref("/products").push({
+      userEmail,
+      imageRef,
+      description,
+      title
+    }).then(()=>{
+      uploadImage(image)
+      setImage("https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg")
+      setImageRef("")
     })
   }
 
-  function sendInformations (name,imagesName,description) {
-    database()
-      .ref('/products')
-      .push({
-        name,
-        imagesName,
-        description
-      })
-      .then(() => {
-          uploadImage(images)
-          setDescription("")
-          setImages([])
-      });
-  };
+  const uploadImage = async() => {
+    const uri = image
+    const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
+    const filename = uri.substring(uri.lastIndexOf('/') + 1);
+    console.log(uploadUri)
+    setDescription("")
+    setTitle("")
+    try {
+      await storage().ref(filename).putFile(uploadUri);
+    } catch (e) {
+      console.error(e);
+    }
+  }
 
-  return (
-    <View style={styles.container}>
-      <View>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Text style={styles.text}>ürün adı burada</Text>
-          <Icon style={{paddingLeft: 10}} name="camera" onPress={pickPhoto} />
-        </View>
-        <SliderBox images={images} />
-        <TextInput
-          style={{backgroundColor: 'green'}}
-          placeholder="Ürün açıklaması.."
-          onChangeText={(text)=>setDescription(text)}
-          multiline={true}
-          value={description}
-          textAlignVertical="top"
-          numberOfLines={10}
-        />
-      </View>
-      <Button title="Gönder" onPress={()=>{
-        sendInformations(name,imagesName,description)
-      }}/>
-    </View>
-  );
-};
+  return(
+    <SafeAreaView>
+      <Button
+      title = "İlk Bunu Çalıştır"
+      onPress = {pickPhoto}
+      />
+      <TextInput
+      placeholder="Başlık Buraya"
+      onChangeText={(text)=>setTitle(text)}
+      value={title}
+      />
+      <TextInput
+      placeholder="Tanım Burara"
+      onChangeText={(text)=>setDescription(text)}
+      value={description}
+      />
+      <Button
+      title = "Upload Information"
+      onPress = {()=>{
+        uploadInformations(userEmail,imageRef, description,title)
+      }}
+      />
 
-const styles = StyleSheet.create({
-  container: {},
-  text: {
-    alignSelf: 'center',
-    fontSize: 18,
-  },
-});
+      <Image
+      style={{width:100,height:100}}
+      source={{uri:image}}
+      />
+    </SafeAreaView>
+  )
+}
 
 export {ImagesContainer};
