@@ -12,12 +12,13 @@ const SearchBar = (props) => {
 
 const styles = StyleSheet.create({
   container:{
-    backgroundColor: "#ff616f",
+    
     margin: 10,
     paddingLeft: 10,
     borderRadius: 10,
     shadowOpacity: 0.2,
     shadowRadius: 5,
+    borderWidth:0.5
   },
 })
 

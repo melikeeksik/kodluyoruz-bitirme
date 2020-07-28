@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   SafeAreaView,
   Text,
@@ -6,13 +6,15 @@ import {
   View,
   StyleSheet,
   Button,
-  ActivityIndicator
+  ActivityIndicator,
+  Dimensions
 } from 'react-native';
-import {Card,} from 'react-native-elements';
+import { Card, Icon } from 'react-native-elements';
 import { SearchBar } from "../Components/MainPage";
 
 import database from "@react-native-firebase/database"
 import storage from "@react-native-firebase/storage"
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 const Main = (props) => {
@@ -21,37 +23,37 @@ const Main = (props) => {
   const [isLoading, setIsLoading] = useState(true)
   const [cpProducts, setcpProducts] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     fecthProducts()
-  },[])
+  }, [])
 
 
-  const fecthProducts = ()=>{
+  const fecthProducts = () => {
     setIsLoading(true)
     database().ref("/products")
-    .on('value',snapshots => {
-      let cpArray = []
-      snapshots.forEach(snap=>{
-        const ref = storage().ref(`${snap.val().imageRef}`)
-        ref.getDownloadURL()
-        .then((url)=>{
-          cpArray.push({
-            imageRef: url,
-            userEmail: snap.val().userEmail,
-            description: snap.val().description,
-            title:snap.val().title
-          })
-          setProducts(cpArray)
-          setcpProducts(cpArray)
-        }).catch(e=>{console.log(e);})
+      .on('value', snapshots => {
+        let cpArray = []
+        snapshots.forEach(snap => {
+          const ref = storage().ref(`${snap.val().imageRef}`)
+          ref.getDownloadURL()
+            .then((url) => {
+              cpArray.push({
+                imageRef: url,
+                userEmail: snap.val().userEmail,
+                description: snap.val().description,
+                title: snap.val().title
+              })
+              setProducts(cpArray)
+              setcpProducts(cpArray)
+            }).catch(e => { console.log(e); })
+        })
       })
-    })
     setIsLoading(false)
   }
 
 
   const searchProduts = (text) => {
-    let filteredList = cpProducts.filter(({description}) => {
+    let filteredList = cpProducts.filter(({ description }) => {
       const productData = description.toUpperCase();
       const textData = text.toUpperCase();
       return productData.indexOf(textData) > -1;
@@ -60,48 +62,90 @@ const Main = (props) => {
     setProducts(filteredList);
   };
 
-  const renderPosts = ({item}) => {
+  const renderPosts = ({ item }) => {
     return (
       <Card
         title={item.title}
-        image={{uri: item.imageRef}}
-        imageStyle={{resizeMode: 'contain'}}
+        titleStyle={styles.Post.title}
+        image={{ uri: item.imageRef }}
+        imageStyle={{ resizeMode: "contain" }}
         containerStyle={styles.Post.container}>
-        <Text style={styles.Post.text}>{item.userEmail}</Text>
-        <Text>{item.description}</Text>
+        <View style={styles.Post.view}>
+          <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+
+            <Text style={styles.Post.text}>{item.userEmail}</Text>
+            <Icon
+              name='mail'
+              color='#0e0e0e' />
+          </View>
+          <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+            <Text>{item.description}</Text>
+            <Icon
+              name='star'
+              color='#0e0e0e' />
+          </View>
+        </View>
       </Card>
     );
   };
 
   return (
-    isLoading ? <ActivityIndicator/> : <SafeAreaView>
-    <View>
-      <Text>Main Page</Text>
-      <SearchBar onSearch={searchProduts}/>
-      <Button
-    title="Fetch"
-    onPress={fecthProducts}
-    />
-      <FlatList
-        keyExtractor={(_, index) => index.toString()}
-        data={products.reverse()}
-        renderItem={renderPosts}
-      />
-    </View>
-  </SafeAreaView>
+    isLoading ? <ActivityIndicator /> : <SafeAreaView>
+      <View style={{ backgroundColor: "#e6f0ff" }}>
+
+        <SearchBar onSearch={searchProduts} />
+
+
+        <FlatList
+          keyExtractor={(_, index) => index.toString()}
+          data={products.reverse()}
+          renderItem={renderPosts}
+          refreshing={isLoading}
+          onRefresh={fecthProducts}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 const styles = {
   Post: StyleSheet.create({
     container: {
       height: 300,
-      margin: 10,
-      borderRadius: 40,
+      margin: 7,
+      borderRadius: 10
+
     },
     text: {
-      fontSize: 20,
+      fontSize: 15,
       fontWeight: 'bold',
+      borderBottomWidth: 0.5
     },
+    title: {
+      fontSize: 15,
+      fontWeight: 'bold',
+      alignSelf: "baseline",
+      paddingLeft: 20,
+      borderBottomWidth: 0.5,
+
+
+
+      borderRadius: 10,
+      padding: 5,
+      margin: 5,
+
+    },
+
+    view: {
+
+      borderRadius: 10,
+      justifyContent: "space-between",
+      padding: 5,
+
+
+
+
+
+    }
   }),
 };
-export {Main};
+export { Main };

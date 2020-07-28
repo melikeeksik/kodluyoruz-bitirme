@@ -33,15 +33,13 @@ const Profile = (props) => {
   const renderCards = ({ item }) => {
     return (
       <Card
-        containerStyle={{ height: 300,
-          margin: 10,
-          borderRadius: 40, }}
+        containerStyle={stlyes.container}
         title={item.title}
+        titleStyle={stlyes.title}
         image={{uri: item.imageRef}}
         imageStyle={{resizeMode: 'contain'}}
       >
-         <Text style={{ fontSize: 20,
-      fontWeight: 'bold',}}>{item.userEmail}</Text>
+         <Text style={stlyes.text}>{item.userEmail}</Text>
         <Text style={{ marginBottom: 10 }}>{item.description}</Text>
       </Card>
     );
@@ -49,7 +47,7 @@ const Profile = (props) => {
 
   return (
     <SafeAreaView>
-      <View>
+      <View style={{backgroundColor:"#e6f0ff"}}>
         <Header
           leftComponent={{ icon: "menu", color: "#fff" }}
           centerComponent={{ text: "MY TITLE", style: { color: "#fff" } }}
@@ -85,6 +83,52 @@ const stlyes = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
+
+    container: {
+      height: 300,
+      margin: 7,
+      borderRadius:10
+    
+    },
+    text: {
+      fontSize: 15,
+      fontWeight: 'bold',
+      borderBottomWidth:0.5
+    },
+    title:{
+      fontSize: 15,
+      fontWeight: 'bold',
+      alignSelf:"baseline",
+      paddingLeft:20,
+      borderBottomWidth:0.5,
+      
+      
+      
+      borderRadius:10,
+      padding:5,
+      margin:5,
+      
+    },
+    Button:{
+      backgroundColor:"#3385ff",
+      borderRadius:10,
+      padding:5,
+      
+      
+    
+
+    },
+  view:{
+    
+    borderRadius:10,
+    justifyContent:"space-between",
+    padding:5,
+    
+    
+    
+
+
+  }
 });
 
 export { Profile };
