@@ -6,6 +6,7 @@ import {
   View,
   StyleSheet,
   Button,
+  ActivityIndicator
 } from 'react-native';
 import {Card,} from 'react-native-elements';
 import { SearchBar } from "../Components/MainPage";
