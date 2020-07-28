@@ -1,92 +1,58 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   Text,
-  Button,
-  Image,
   FlatList,
   View,
-  Dimensions,
   StyleSheet,
+  Button,
 } from 'react-native';
-import {Card, ListItem, Icon} from 'react-native-elements';
-
+import {Card,} from 'react-native-elements';
 import { SearchBar } from "../Components/MainPage";
 
+import database from "@react-native-firebase/database"
+import storage from "@react-native-firebase/storage"
+
+
 const Main = (props) => {
-  const [products, setProducts] = useState([
-    {
-      name: 'melike',
-      detail: 'ürün ücretsizdir',
-      image: 'https://reactnative.dev/img/tiny_logo.png',
-    },
-    {
-      name: 'mert',
-      detail: 'ürün ücretsizdir',
-      image: 'https://reactnative.dev/img/tiny_logo.png',
-    },
-    {
-      name: 'melike',
-      detail: 'ürün ücretsizdir',
-      image: 'https://reactnative.dev/img/tiny_logo.png',
-    },
-    {
-      name: 'mert',
-      detail: 'ürün ücretsizdir',
-      image: 'https://reactnative.dev/img/tiny_logo.png',
-    },
-  ]);
-  const [cpProducts, setcpProducts] = useState([
-    {
-      name: 'melike',
-      detail: 'ürün ücretsizdir',
-      image: 'https://reactnative.dev/img/tiny_logo.png',
-    },
-    {
-      name: 'mert',
-      detail: 'ürün ücretsizdir',
-      image: 'https://reactnative.dev/img/tiny_logo.png',
-    },
-    {
-      name: 'melike',
-      detail: 'ürün ücretsizdir',
-      image: 'https://reactnative.dev/img/tiny_logo.png',
-    },
-    {
-      name: 'mert',
-      detail: 'ürün ücretsizdir',
-      image: 'https://reactnative.dev/img/tiny_logo.png',
-    },
-  ]);
 
-  
-  const Post = [
-    {
-      name: 'melike',
-      detail: 'ürün ücretsizdir',
-      image: 'https://reactnative.dev/img/tiny_logo.png',
-    },
-    {
-      name: 'mert',
-      detail: 'ürün ücretsizdir',
-      image: 'https://reactnative.dev/img/tiny_logo.png',
-    },
-    {
-      name: 'melike',
-      detail: 'ürün ücretsizdir',
-      image: 'https://reactnative.dev/img/tiny_logo.png',
-    },
-    {
-      name: 'mert',
-      detail: 'ürün ücretsizdir',
-      image: 'https://reactnative.dev/img/tiny_logo.png',
-    },
-  ];
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true)
+  const [cpProducts, setcpProducts] = useState([]);
+
+  useEffect(()=>{
+    fecthProducts()
+  },[])
+
+
+  const fecthProducts = ()=>{
+    setIsLoading(true)
+    database().ref("/products")
+    .on('value',snapshots => {
+      let cpArray = []
+      snapshots.forEach(snap=>{
+        const ref = storage().ref(`${snap.val().imageRef}`)
+        ref.getDownloadURL()
+        .then((url)=>{
+          cpArray.push({
+            imageRef: url,
+            userEmail: snap.val().userEmail,
+            description: snap.val().description,
+            title:snap.val().title
+          })
+          setProducts(cpArray)
+          setcpProducts(cpArray)
+        }).catch(e=>{console.log(e);})
+      })
+    })
+    setIsLoading(false)
+  }
+
+
   const searchProduts = (text) => {
-    let filteredList = cpProducts.filter(({name}) => {
-      const productData = name.toUpperCase();
+    let filteredList = cpProducts.filter(({description}) => {
+      const productData = description.toUpperCase();
       const textData = text.toUpperCase();
-
       return productData.indexOf(textData) > -1;
     });
 
@@ -96,27 +62,32 @@ const Main = (props) => {
   const renderPosts = ({item}) => {
     return (
       <Card
-        image={{uri: item.image}}
+        title={item.title}
+        image={{uri: item.imageRef}}
         imageStyle={{resizeMode: 'contain'}}
         containerStyle={styles.Post.container}>
-        <Text style={styles.Post.text}>{item.name}</Text>
-        <Text>{item.detail}</Text>
+        <Text style={styles.Post.text}>{item.userEmail}</Text>
+        <Text>{item.description}</Text>
       </Card>
     );
   };
 
   return (
-    <SafeAreaView>
-      <View>
-        <Text>Main Page</Text>
-        <SearchBar onSearch={searchProduts}/>
-        <FlatList
-          keyExtractor={(_, index) => index.toString()}
-          data={products}
-          renderItem={renderPosts}
-        />
-      </View>
-    </SafeAreaView>
+    isLoading ? <ActivityIndicator/> : <SafeAreaView>
+    <View>
+      <Text>Main Page</Text>
+      <SearchBar onSearch={searchProduts}/>
+      <Button
+    title="Fetch"
+    onPress={fecthProducts}
+    />
+      <FlatList
+        keyExtractor={(_, index) => index.toString()}
+        data={products.reverse()}
+        renderItem={renderPosts}
+      />
+    </View>
+  </SafeAreaView>
   );
 };
 const styles = {

@@ -7,8 +7,9 @@ import { View } from "react-native";
 const Signout = props=>{
     const signOut = () => {
         auth().signOut()
-        AsyncStorage.removeItem('@USER_ID')
         props.navigation.navigate("Login")
+        AsyncStorage.removeItem('@USER_ID')
+        
     }
     useEffect(()=>
     signOut()

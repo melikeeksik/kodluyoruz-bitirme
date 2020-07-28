@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, Text, Image } from "react-native";
+import { View} from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 
 const SplashScreen = (props) => {
