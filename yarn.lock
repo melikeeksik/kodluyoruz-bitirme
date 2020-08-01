@@ -5698,6 +5698,11 @@ react-native-elements@^2.0.4:
     react-native-ratings "^7.2.0"
     react-native-status-bar-height "^2.5.0"
 
+react-native-email-link@^1.9.2:
+  version "1.9.2"
+  resolved "https://registry.yarnpkg.com/react-native-email-link/-/react-native-email-link-1.9.2.tgz#cbacf7eec9ab8c80f01b0daf50e14edeb466d9cf"
+  integrity sha512-w9VbKWcbqO138QcuiUyNUGoLcwZPhUY/jl+y3oiyuCzBwZGvoFeo138TOxoI8FecpHd+IMtsVn9QZVIB8PFXpQ==
+
 react-native-gesture-handler@^1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.7.0.tgz#0ef74a5ba836832e497dc49eb1ce58baa6c617e5"
