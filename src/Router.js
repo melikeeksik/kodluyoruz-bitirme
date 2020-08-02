@@ -3,7 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 
-import {Login, Signup, SplashScreen} from './Pages';
+import {Login, Signup, SplashScreen,Comments} from './Pages';
 import {
   Main,
   Profile,
@@ -58,6 +58,12 @@ function Router() {
           component={DrawerMenu}
           options={{headerShown: false, gestureEnabled: false}}
         />
+        <Stack.Screen
+          name="Comments"
+          component={Comments}
+          options={{headerShown: false, gestureEnabled: false}}
+        />
+         
       </Stack.Navigator>
     </NavigationContainer>
   );
