@@ -1,41 +1,49 @@
-import React, { useState, useEffect } from "react";
+import React from "react"
+import { SafeAreaView, Text, FlatList, Button, TextInput,Dimensions } from "react-native";
+
 import firestore from "@react-native-firebase/firestore";
-import { Text, View, FlatList } from "react-native";
 
-const Comments = (props) => {
-  const [comments, setComments] = useState([""]);
-  const ref = firestore().collection("Forum");
-  console.log(props.route.params.id);
-  useEffect(() => {
-    let list = [];
-    firestore()
-      .collection("Forum")
-      .doc(props.route.params.id)
-      .get()
-      .then((documentSnapshot) => {
-        const { comments } =documentSnapshot.data()
-        
-       
-        list.push(comments);
- 
-       
-        setComments(list);
-        console.log("comments", comments);
-      });
-  }, []);
-  const renderComments = ({ item }) => {
-    return (<Text>{item.name}</Text>)
-  };
 
-  return (
-    <View>
+const Comments = (props)=>{
+  const [userComments, setUserComments] = React.useState([])
+  const [comment, setComment] =  React.useState("")
+
+  React.useEffect(()=>{
+    fetchComments()
+  },[])
+
+  const fetchComments = ()=>{
+    firestore().collection("Forum").doc(props.route.params.id)
+    .onSnapshot((querySnapshots)=>{
+      setUserComments(querySnapshots.data().comments)
+    })
+  }
+
+  const sendComment = ()=>{
+    let dummyArray=userComments.concat({description:comment,mail:props.route.params.mail})
+    firestore().collection("Forum").doc(props.route.params.id).update({
+      comments: dummyArray
+    })
+    setComment("")
+  }
+  return(
+    <SafeAreaView>
+      <Text style={{alignSelf:"center", fontSize:20,fontWeight:"bold"}}>{props.route.params.entryDescription}</Text>
+      <TextInput 
+      style={{height:50,width:Dimensions.get("window").width,backgroundColor:'green'}}
+      placeholder="Entry Buraya"
+      value={comment}
+      onChangeText={(text)=>setComment(text)}/>
+      <Button
+      title="Yorum Ekle"
+      onPress={sendComment}/>
       <FlatList
-        keyExtractor={(_, index) => index.toString()}
-        data={comments}
-        renderItem={renderComments}
+      keyExtractor={(index)=>index.toString()}
+      data={userComments}
+      renderItem={({item})=><Text>{item.description}</Text>}
       />
-    </View>
-  );
-};
+    </SafeAreaView>
+  )
+}
 
-export { Comments };
+export { Comments }

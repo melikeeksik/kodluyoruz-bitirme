@@ -1161,6 +1161,11 @@
   resolved "https://registry.yarnpkg.com/@react-native-firebase/database/-/database-7.3.2.tgz#ce5278cb35d939830d42059d48ebcb4d25cd68ec"
   integrity sha512-yXP5nUY680PsC41fNKg/GEq7irMbQGB8C5/C02AT5jG++AMEB+mS95g6psBs82mLAAEF5EA6JDHCOVpokehcnA==
 
+"@react-native-firebase/firestore@^7.4.3":
+  version "7.4.3"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/firestore/-/firestore-7.4.3.tgz#6962037bd2978a53227faf1477f51c265af91b30"
+  integrity sha512-aNo+DfZSJCPe/nClo/PofzVnclP50TMcw9u5UN7VaJCm1mAixhlqi97/kMarigxPIhoOQMGoF6MEQiyRd7q3eA==
+
 "@react-native-firebase/storage@^7.2.2":
   version "7.2.2"
   resolved "https://registry.yarnpkg.com/@react-native-firebase/storage/-/storage-7.2.2.tgz#a2fcbd1bee602516ae863372ba5e3260e4e92ead"
@@ -5036,6 +5041,11 @@ mkdirp@^0.5.1:
   integrity sha512-NKmAlESf6jMGym1++R0Ra7wvhV+wFW63FaSOFPwRahvea0gMUcGUhVeAg/0BC0wiv9ih5NYPB1Wn1UEI1/L+xQ==
   dependencies:
     minimist "^1.2.5"
+
+moment@^2.27.0:
+  version "2.27.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.27.0.tgz#8bff4e3e26a236220dfe3e36de756b6ebaa0105d"
+  integrity sha512-al0MUK7cpIcglMv3YF13qSgdAIqxHTO7brRtaz3DlSULbqfazqkc5kEjNrLDOM7fsjshoFIihnU8snrP7zUvhQ==
 
 ms@2.0.0:
   version "2.0.0"
