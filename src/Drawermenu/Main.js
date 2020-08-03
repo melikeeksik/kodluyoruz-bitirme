@@ -124,17 +124,19 @@ const styles = {
       fontSize: 15,
       fontWeight: 'bold',
       borderBottomWidth: 0.5,
+      
     },
     title: {
       fontSize: 15,
       fontWeight: 'bold',
       alignSelf: 'baseline',
-      paddingLeft: 20,
+      
       borderBottomWidth: 0.5,
 
       borderRadius: 10,
       padding: 5,
       margin: 5,
+      color:"#424242"
     },
 
     view: {
