@@ -1,12 +1,12 @@
 import React, { useState } from "react"
-import {SafeAreaView, Image, Text, Button, Alert} from "react-native"
+import {SafeAreaView, Image, Text, Button, Alert, View} from "react-native"
 
 import auth from "@react-native-firebase/auth"
 import database from "@react-native-firebase/database"
 import storage from '@react-native-firebase/storage';
 
 import ImagePicker from 'react-native-image-picker';
-import { TextInput } from "react-native-gesture-handler";
+import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 
 
 const options = {
@@ -75,11 +75,11 @@ const ImagesContainer = (props) => {
   }
 
   return(
-    <SafeAreaView>
-      <Button
-      title = "İlk Bunu Çalıştır"
-      onPress = {pickPhoto}
-      />
+    <SafeAreaView >
+      <View style={{backgroundColor: '#fce4ec'}}>
+      <TouchableOpacity onPress = {pickPhoto}>
+        <Text>ilk burayı</Text>
+      </TouchableOpacity>
       <TextInput
       placeholder="Başlık Buraya"
       onChangeText={(text)=>setTitle(text)}
@@ -90,17 +90,17 @@ const ImagesContainer = (props) => {
       onChangeText={(text)=>setDescription(text)}
       value={description}
       />
-      <Button
-      title = "Upload Information"
-      onPress = {()=>{
+      <TouchableOpacity onPress = {()=>{
         uploadInformations(userEmail,imageRef, description,title)
-      }}
-      />
+      }}>
+        <Text>sonra burayı</Text>
+      </TouchableOpacity>
 
       <Image
       style={{width:100,height:100}}
       source={{uri:image}}
       />
+      </View>
     </SafeAreaView>
   )
 }

@@ -7,9 +7,12 @@ import {
   TextInput,
   Dimensions,
   View,
+  StyleSheet,
 } from "react-native";
+import { Card } from "react-native-elements";
 
 import firestore from "@react-native-firebase/firestore";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const Comments = (props) => {
   const [userComments, setUserComments] = React.useState([]);
@@ -38,46 +41,106 @@ const Comments = (props) => {
     });
     setComment("");
   };
+  const renderComments = ({ item, index }) => {
+    return (
+      <Card title="deneme@gmail.com"
+      titleStyle={styles.Comments.title}
+      containerStyle={styles.Comments.container}>
+        <Text style={styles.Comments.text}>{item.description}</Text>
+      </Card>
+    );
+  };
   return (
     <SafeAreaView>
-      <View >
-        <View >
+      <View style={{ backgroundColor: "#fce4ec" }}>
+        <View>
           <Text
-            style={{ alignSelf: "center", fontSize: 20 ,backgroundColor:"red", margin: 10,
-            borderRadius: 10,
-            padding: 10}}
+            style={styles.Comments.post}
           >
             {props.route.params.entryDescription}
           </Text>
+          <Text>YORUMLAR</Text>
 
           <FlatList
             keyExtractor={(index) => index.toString()}
             data={userComments}
-            renderItem={({ item }) =>{
-              return(
-                <Text  style={{ alignSelf: "center", fontSize: 20 ,backgroundColor:"red", margin: 10,
-                borderRadius: 10,
-                padding: 10}}>{item.description}</Text>
-              )
-            }}
+            renderItem={renderComments}
           />
         </View>
-        <View>
+        <View  style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <TextInput
-            style={{
-              height: 50,
-              width: Dimensions.get("window").width,
-              backgroundColor: "green",
-            }}
+            style={styles.Comments.textınput}
             placeholder="Entry Buraya"
             value={comment}
             onChangeText={(text) => setComment(text)}
           />
-          <Button title="Yorum Ekle" onPress={sendComment} />
+         <TouchableOpacity style={styles.Comments.button} onPress={sendComment}><Text>
+           YORUM YAP</Text></TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
   );
+};
+const styles = {
+  Comments: StyleSheet.create({
+    container: {
+      margin: 10,
+      borderRadius: 10,
+      padding: 10,
+      backgroundColor: "white",
+    },
+    title: {
+      fontSize: 15,
+      fontWeight: "bold",
+      alignSelf: "baseline",
+
+      borderBottomWidth: 0.5,
+
+      borderRadius: 10,
+      padding: 5,
+      margin: 5,
+    },
+    text: {
+      fontSize: 15,
+    },
+    textınput: {
+      backgroundColor: "rgba(255, 255, 255, 0.4)",
+      width: Dimensions.get("window").width * 0.8,
+      height: 60,
+      borderRadius: 20,
+      color: "#ffffff",
+      margin: 7,
+    },
+    button: {
+      backgroundColor: "#eeeeee",
+      margin: 7,
+
+      borderRadius: 10,
+      height: 60,
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    title: {
+      fontSize: 15,
+      fontWeight: 'bold',
+      alignSelf: 'baseline',
+      
+      borderBottomWidth: 0.5,
+
+      borderRadius: 10,
+      padding: 5,
+      margin: 5,
+      color:"#424242"
+    },
+    post:{
+      alignSelf: "center",
+      fontSize: 20,
+      backgroundColor: "rgba(255, 255, 255, 0.4)",
+      margin: 10,
+      borderRadius: 10,
+      padding: 10,
+    }
+  }),
 };
 
 export { Comments };

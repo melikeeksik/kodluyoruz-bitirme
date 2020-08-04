@@ -7,7 +7,6 @@ import {Login, Signup, SplashScreen,Comments} from './Pages';
 import {
   Main,
   Profile,
-  Messages,
   Blog,
   Forum,
   Signout,
@@ -26,7 +25,7 @@ function DrawerMenu() {
       />
       <Drawer.Screen name="SignOut" component={Signout} />
       <Drawer.Screen name="Profile" component={Profile} />
-      <Drawer.Screen name="Messages" component={Messages} />
+     
       <Drawer.Screen name="Forum" component={Forum} />
       <Drawer.Screen name="Blog" component={Blog} />
       <Drawer.Screen name="Add Products" component={AddProducts} />

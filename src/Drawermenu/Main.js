@@ -74,21 +74,22 @@ const Main = (props) => {
   const renderPosts = ({item,index}) => {
     return (
       <Card
-        title={item.title}
+        title={item.userEmail}
         titleStyle={styles.Post.title}
         image={{uri: item.imageRef}}
-        imageStyle={{resizeMode: 'contain'}}
+        imageStyle={{resizeMode:"contain"}}
         containerStyle={styles.Post.container}>
         <View style={styles.Post.view}>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-            <Text style={styles.Post.text}>{item.userEmail}</Text>
-            <Icon name="mail" color="#0e0e0e" onPress={()=>{
-              sendMail(index)
-            }}/>
+            <Text style={styles.Post.text}>{item.title}</Text>
+            
           </View>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <Text>{item.description}</Text>
-            <Icon name="star" color="#0e0e0e" />
+            <Icon name="mail" color="#0e0e0e" onPress={()=>{
+              sendMail(index)
+            }}/>
+           
           </View>
         </View>
       </Card>
@@ -99,7 +100,7 @@ const Main = (props) => {
     <ActivityIndicator />
   ) : (
     <SafeAreaView>
-      <View style={{backgroundColor: '#e6f0ff'}}>
+      <View style={{backgroundColor: '#fce4ec'}}>
         <SearchBar onSearch={searchProduts} />
 
         <FlatList
@@ -119,11 +120,13 @@ const styles = {
       height: 300,
       margin: 7,
       borderRadius: 10,
+      
     },
     text: {
       fontSize: 15,
       fontWeight: 'bold',
-      borderBottomWidth: 0.5,
+      
+     
       
     },
     title: {

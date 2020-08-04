@@ -58,21 +58,18 @@ const Forum = (props) => {
 
   return (
     <SafeAreaView>
-      <View style={{ backgroundColor: "#e6f0ff" }}>
-        <TextInput
-          style={{
-            margin: 10,
-            paddingLeft: 10,
-            borderRadius: 10,
-            shadowOpacity: 0.2,
-            shadowRadius: 5,
-            borderWidth: 0.5,
-          }}
-          placeholder="Entry Buraya"
-          value={description}
-          onChangeText={(text) => setDescription(text)}
-        />
-        <Button title="Send Forum Entry" onPress={sendForumEntry} />
+      <View style={{ backgroundColor: "#fce4ec" }}>
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          <TextInput
+            style={styles.Forum.textınput}
+            placeholder="Entry Buraya"
+            value={description}
+            onChangeText={(text) => setDescription(text)}
+          />
+          <TouchableOpacity  style ={styles.Forum.button}onPress={sendForumEntry}>
+            <Text>SEND</Text>
+          </TouchableOpacity>
+        </View>
         <FlatList
           keyExtractor={(index) => index.toString()}
           data={entries}
@@ -127,6 +124,29 @@ const styles = {
     text: {
       fontSize: 15,
     },
+    textınput: {
+      backgroundColor: 'rgba(255, 255, 255, 0.4)',
+      width: Dimensions.get("window").width*0.8,
+      height: 60,
+      borderRadius: 20,
+      color: '#ffffff',
+      margin:7,
+
+    },
+    button:{
+      
+      backgroundColor: '#eeeeee',
+      margin: 7,
+      width:Dimensions.get("window").width*0.3,
+      
+      
+      borderRadius: 10,
+      height:60,
+      justifyContent:"center",
+      alignItems:"center"
+      
+      
+    }
   }),
 };
 

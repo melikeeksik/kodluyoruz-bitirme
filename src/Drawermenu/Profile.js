@@ -71,7 +71,7 @@ const Profile = (props) => {
     <ActivityIndicator />
   ) : (
     <SafeAreaView style={{flex: 1, marginBottom: 10}}>
-      <View style={{backgroundColor: '#e6f0ff'}}>
+      <View style={{ backgroundColor: "#fce4ec" ,flex:1}}>
         <View style={stlyes.profileHead}>
           <Avatar
             size={100}
@@ -113,11 +113,12 @@ const stlyes = StyleSheet.create({
     height: 300,
     margin: 7,
     borderRadius: 10,
+    backgroundColor:"#f5f5f5"
   },
   text: {
     fontSize: 15,
     fontWeight: 'bold',
-    borderBottomWidth: 0.5,
+    
   },
   title: {
     fontSize: 15,
@@ -129,6 +130,7 @@ const stlyes = StyleSheet.create({
     borderRadius: 10,
     padding: 5,
     margin: 5,
+    color:"#424242"
   },
   Button: {
     backgroundColor: '#3385ff',
