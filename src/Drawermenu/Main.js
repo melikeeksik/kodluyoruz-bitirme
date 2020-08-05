@@ -7,18 +7,22 @@ import {
   StyleSheet,
   ActivityIndicator,
 } from 'react-native';
-import {Card, Icon} from 'react-native-elements';
-import {SearchBar} from '../Components/MainPage';
 
+import {SearchBar,} from '../Components/MainPage';
+import { ImgModal } from "../Components/General";
+
+import {Card, Icon} from 'react-native-elements';
 import database from '@react-native-firebase/database';
 import storage from '@react-native-firebase/storage';
-
 import { openComposer } from 'react-native-email-link'
+
 
 const Main = (props) => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [cpProducts, setcpProducts] = useState([]);
+  const [modalShow, setModalShow] = useState(false)
+  const [modalUrl, setModalUrl] = useState("")
 
   useEffect(() => {
     fecthProducts();
@@ -82,7 +86,10 @@ const Main = (props) => {
         <View style={styles.Post.view}>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <Text style={styles.Post.text}>{item.title}</Text>
-            
+            <Icon name="search" color="#0e0e0e" onPress={()=>{
+              setModalUrl(products[index].imageRef)
+              setModalShow(true)
+            }}/>
           </View>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <Text>{item.description}</Text>
@@ -99,8 +106,16 @@ const Main = (props) => {
   return isLoading ? (
     <ActivityIndicator />
   ) : (
-    <SafeAreaView>
+    <SafeAreaView style={{flex:1,paddingBottom:100}}>
       <View style={{backgroundColor: '#fce4ec'}}>
+        <ImgModal 
+        imgUrl={modalUrl} 
+        visible={modalShow}
+        onPress={()=>{
+          console.log(">@@@@@<")
+          setModalShow(false)
+        }}
+        />
         <SearchBar onSearch={searchProduts} />
 
         <FlatList
