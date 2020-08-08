@@ -3,13 +3,13 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 
-import {Login, Signup, SplashScreen,Comments} from './Pages';
+import {Login, Signup, SplashScreen,Comments,ProfilInformation} from './Pages';
 import {
   Main,
   Profile,
   Blog,
   Forum,
-  Signout,
+ 
   AddProducts,
 } from './Drawermenu';
 
@@ -23,7 +23,7 @@ function DrawerMenu() {
         component={Main}
         options={{headerShown: false}}
       />
-      <Drawer.Screen name="SignOut" component={Signout} />
+      
       <Drawer.Screen name="Profile" component={Profile} />
      
       <Drawer.Screen name="Forum" component={Forum} />
@@ -62,6 +62,12 @@ function Router() {
           component={Comments}
           options={{headerShown: false, gestureEnabled: false}}
         />
+         <Stack.Screen
+          name="ProfilInformation"
+          component={ProfilInformation}
+          options={{headerShown: false, gestureEnabled: false}}
+        />
+       
          
       </Stack.Navigator>
     </NavigationContainer>

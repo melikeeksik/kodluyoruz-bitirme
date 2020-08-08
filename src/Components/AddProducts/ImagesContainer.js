@@ -1,12 +1,15 @@
 import React, { useState } from "react"
 import {SafeAreaView, Image, Text, Button, Alert, View} from "react-native"
 
+
+
 import auth from "@react-native-firebase/auth"
 import database from "@react-native-firebase/database"
 import storage from '@react-native-firebase/storage';
 
 import ImagePicker from 'react-native-image-picker';
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
+
 
 
 const options = {
@@ -25,7 +28,7 @@ const ImagesContainer = (props) => {
   const [imageRef, setImageRef] = useState("")
   const [description, setDescription] = useState("")
   const [title, setTitle] = useState("")
-
+  
   const userEmail = auth().currentUser.email
   const pickPhoto = () => {
     //alert('clicked');
@@ -47,7 +50,7 @@ const ImagesContainer = (props) => {
     });
   };
 
-  function uploadInformations(userEmail, imageRef, description,title){
+  function uploadInformations(userEmail, imageRef, description,title,date){
     database().ref("/products").push({
       userEmail,
       imageRef,
