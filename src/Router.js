@@ -3,7 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 
-import {Login, Signup, SplashScreen,Comments,ProfilInformation} from './Pages';
+import {Login, Signup, SplashScreen,Comments,ProfilInformation, ProfileGuest} from './Pages';
 import {
   Main,
   Profile,
@@ -67,6 +67,12 @@ function Router() {
           component={ProfilInformation}
           options={{headerShown: false, gestureEnabled: false}}
         />
+        <Stack.Screen
+          name="ProfileGuest"
+          component={ProfileGuest}
+          options={{headerShown: false, gestureEnabled: false}}
+        />
+        
        
          
       </Stack.Navigator>

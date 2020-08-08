@@ -89,7 +89,7 @@ const Main = (props) => {
   const renderPosts = ({ item, index }) => {
     return (
       <Card
-        title={item.userEmail}
+        title={item.title}
         titleStyle={styles.Post.title}
         image={{ uri: item.imageRef }}
         imageStyle={{ resizeMode: "contain" }}
@@ -99,7 +99,17 @@ const Main = (props) => {
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
-            <Text style={styles.Post.text}>{item.title}</Text>
+            <TouchableOpacity
+            onPress={()=>{
+              if(products[index].userEmail===auth().currentUser.email){
+                props.navigation.navigate("Profile")
+              }else if(products[index].userEmail != auth().currentUser.email){
+                props.navigation.navigate("ProfileGuest", {clickedUser:products[index].userEmail})
+              }
+            }}
+            >
+            <Text style={styles.Post.text}>{item.userEmail}</Text>
+            </TouchableOpacity>
             <Icon
               name="search"
               color="#0e0e0e"
@@ -129,7 +139,7 @@ const Main = (props) => {
   return isLoading ? (
     <ActivityIndicator />
   ) : (
-    <SafeAreaView style={{ flex: 1, paddingBottom: 100 }}>
+    <SafeAreaView style={{ flex: 1 }}>
       <View style={{ backgroundColor: "#fce4ec" }}>
         <Header
           leftComponent={{ icon: "menu", color: "#fff" }}

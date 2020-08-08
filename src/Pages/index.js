@@ -1,5 +1,6 @@
-export *from "./Login"
-export *from "./Signup"
+export * from "./Login"
+export * from "./Signup"
 export * from "./SplashScreen"
 export * from "./Comments"
 export * from "./ProfilInformation"
+export * from "./ProfileGuest"

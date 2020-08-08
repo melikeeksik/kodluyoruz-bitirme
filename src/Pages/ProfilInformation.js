@@ -24,7 +24,8 @@ const ProfilInformation = (props) => {
       .ref(`users/${userid}`)
       .update({
         name:name,
-        surname:surname
+        surname:surname,
+        email: auth().currentUser.email
       })
       .then(() => console.log("Data set."));
   };
@@ -69,7 +70,7 @@ const ProfilInformation = (props) => {
     }
   };
   return (
-    <View style={{ padding: 40 }}>
+    <View style={{ padding: 40, flexDirection:"column-reverse" }}>
       <TextInput
         onChangeText={(text) => setName(text)}
         
