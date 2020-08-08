@@ -93,7 +93,9 @@ const ImagesContainer = (props) => {
       onChangeText={(text)=>setDescription(text)}
       value={description}
       />
-      <TouchableOpacity onPress = {()=>{
+      <TouchableOpacity 
+      style={{margin:10}}
+      onPress = {()=>{
         uploadInformations(userEmail,imageRef, description,title)
       }}>
         <Text>sonra burayı</Text>

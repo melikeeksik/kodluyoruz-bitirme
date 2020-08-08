@@ -1,5 +1,12 @@
 import React from 'react';
-import {SafeAreaView, View, Text, FlatList, StyleSheet, Button} from 'react-native';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  Button,
+} from 'react-native';
 import {Card} from 'react-native-elements';
 
 import database from '@react-native-firebase/database';
@@ -41,7 +48,18 @@ const ProfileGuest = (props) => {
               });
           }
         });
-        
+        database()
+          .ref('users/')
+          .on('value', (snapshots) => {
+            snapshots.forEach((snap) => {
+              if (snap.val().email === clickedUser) {
+                setUser({
+                  name: snap.val().name,
+                  surname: snap.val().surname,
+                });
+              }
+            });
+          });
       });
   };
 
@@ -60,23 +78,7 @@ const ProfileGuest = (props) => {
   };
   return (
     <SafeAreaView>
-      <View style={{marginVertical:20}}>
-        <Button
-        title="Tıkla"
-        onPress={()=>{
-          database()
-        .ref('users/')
-        .on('value', (snapshots) => {
-          snapshots.forEach((snap) => {
-            if(snap.val().email === clickedUser){
-              setUser({
-                name: snap.val().name,
-                surname: snap.val().surname
-              })
-            }
-          });
-        });
-        }}/>
+      <View style={{marginVertical: 20}}>
         <Text>{user.name}</Text>
         <Text>{user.surname}</Text>
       </View>

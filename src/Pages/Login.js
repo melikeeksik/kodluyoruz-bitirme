@@ -2,11 +2,9 @@ import React, {useState} from 'react';
 import {
   SafeAreaView,
   Text,
-  TextInput,
   View,
   TouchableOpacity,
   Alert,
-  Image,
   StyleSheet,
   Dimensions,
   ImageBackground
@@ -14,13 +12,16 @@ import {
 import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-community/async-storage';
 
+import { Input, Button, Card } from 'react-native-elements';
+
+
 const Login = (props) => {
   const [usermail, setUserMail] = useState('');
   const [userpass, setPassword] = useState('');
 
-  setMail = (text) => setUserMail(text);
+  const setMail = (text) => setUserMail(text);
 
-  setPass = (text) => setPassword(text);
+  const setPass = (text) => setPassword(text);
 
   const loginUser = async () => {
     try {
@@ -37,33 +38,66 @@ const Login = (props) => {
 
   return (
     <ImageBackground   style={styles.Login.Image}source={{uri:"https://i.pinimg.com/564x/78/f9/09/78f9091de9ac0d47467438b78b3fe3b0.jpg"}}>
-      <SafeAreaView style={{flex: 1}}>
-      <View style={{flex: 1, justifyContent: 'center'}}>
+      <SafeAreaView style={{flex: 1,justifyContent:"center"}}>
+      <Card
+      containerStyle={{
+        borderRadius:5,
+        opacity:0.8
+      }}
+      titleStyle={{
+        fontSize: 30,
+        fontWeight: "bold",
+        fontFamily: "lucida grande",
+  
+      }}
+      title="AL GİTSİN">
+         <View>
      
-        <TextInput
-          style={styles.Login.input}
-          placeholder="E-posta adresinizi giriniz.."
-          placeholderTextColor="#424242"
-          onChangeText={setMail}
-          value={usermail}
-          keyboardType="email-address"
-          autoCapitalize="none"
-          
-        />
+     <Input
+       style={styles.Login.input}
+       leftIcon={{name:"mail"}}
+       placeholder="E-posta adresinizi giriniz.."
+       placeholderTextColor="#424242"
+       onChangeText={setMail}
+       value={usermail}
+       keyboardType="email-address"
+       autoCapitalize="none"
+       
+     />
 
-        <TextInput
-          style={styles.Login.input}
-          placeholder="Şifrenizi giriniz.."
-          placeholderTextColor="#424242"
-          onChangeText={setPass}
-          value={userpass}
-          secureTextEntry
-        />
+     <Input
+     leftIcon={{name:"lock"}}
+       style={styles.Login.input}
+       placeholder="Şifrenizi giriniz.."
+       placeholderTextColor="#424242"
+       onChangeText={setPass}
+       value={userpass}
+       secureTextEntry
+     />
 
-        <View style={{marginTop: 20}}>
-          <TouchableOpacity
+     <View style={{marginTop: 20, flexDirection:"row", justifyContent:"space-evenly"}}>
+       <Button
+       onPress={()=>{
+         props.navigation.navigate("Signup")
+       }}
+       title="Kayıt Ol"
+       type="solid"/>
+       <Button
+       onPress={loginUser}
+       title="Giriş Yap"
+       type="outline"/>
+     </View>
+   </View>
+      </Card>
+    </SafeAreaView>
+    </ImageBackground>
+  );
+};
+
+/*
+<TouchableOpacity
             style={styles.Login.button}
-            onPress={loginUser}>
+            
             <Text style={{color:"#424242"}}>Giriş Yap</Text>
           </TouchableOpacity>
 
@@ -72,12 +106,9 @@ const Login = (props) => {
             onPress={() => props.navigation.navigate('Signup')}>
             <Text style={{color:"#424242"}}>Kayıt Ol</Text>
           </TouchableOpacity>
-        </View>
-      </View>
-    </SafeAreaView>
-    </ImageBackground>
-  );
-};
+
+*/
+
 const styles ={
   Login : StyleSheet.create({
     Image:{
