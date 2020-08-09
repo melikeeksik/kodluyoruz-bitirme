@@ -43,22 +43,30 @@ const Comments = (props) => {
   };
   const renderComments = ({ item, index }) => {
     return (
-      <Card title="deneme@gmail.com"
-      titleStyle={styles.Comments.title}
-      containerStyle={styles.Comments.container}>
+      <Card
+        title="deneme@gmail.com"
+        titleStyle={styles.Comments.title}
+        containerStyle={styles.Comments.container}
+      >
         <Text style={styles.Comments.text}>{item.description}</Text>
       </Card>
     );
   };
   return (
-    <SafeAreaView>
-      <View style={{ backgroundColor: "#fce4ec" }}>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={{ backgroundColor: "#fce4ec", flex: 1, paddingTop: 30 }}>
         <View>
-          <Text
-            style={styles.Comments.post}
+          <View
+            style={{
+              borderRadius: 10,
+              margin: 5,
+
+              backgroundColor: "white",
+            }}
           >
-            {props.route.params.entryDescription}
-          </Text>
+            <Text>{props.route.params.title}</Text>
+            <Text>{props.route.params.entryDescription}</Text>
+          </View>
           <Text>YORUMLAR</Text>
 
           <FlatList
@@ -67,16 +75,17 @@ const Comments = (props) => {
             renderItem={renderComments}
           />
         </View>
-        <View  style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <TextInput
-            style={styles.Comments.textınput}
-            placeholder="Entry Buraya"
-            value={comment}
-            onChangeText={(text) => setComment(text)}
-          />
-         <TouchableOpacity style={styles.Comments.button} onPress={sendComment}><Text>
-           YORUM YAP</Text></TouchableOpacity>
-        </View>
+      </View>
+      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+        <TextInput
+          style={styles.Comments.textınput}
+          placeholder="Entry Buraya"
+          value={comment}
+          onChangeText={(text) => setComment(text)}
+        />
+        <TouchableOpacity style={styles.Comments.button} onPress={sendComment}>
+          <Text>YORUM YAP</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -84,9 +93,9 @@ const Comments = (props) => {
 const styles = {
   Comments: StyleSheet.create({
     container: {
-      margin: 10,
       borderRadius: 10,
-      padding: 10,
+      margin: 5,
+
       backgroundColor: "white",
     },
     title: {
@@ -122,24 +131,24 @@ const styles = {
     },
     title: {
       fontSize: 15,
-      fontWeight: 'bold',
-      alignSelf: 'baseline',
-      
+      fontWeight: "bold",
+      alignSelf: "baseline",
+
       borderBottomWidth: 0.5,
 
       borderRadius: 10,
       padding: 5,
       margin: 5,
-      color:"#424242"
+      color: "#424242",
     },
-    post:{
+    post: {
       alignSelf: "center",
       fontSize: 20,
       backgroundColor: "rgba(255, 255, 255, 0.4)",
       margin: 10,
       borderRadius: 10,
       padding: 10,
-    }
+    },
   }),
 };
 

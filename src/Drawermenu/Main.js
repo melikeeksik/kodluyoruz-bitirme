@@ -85,7 +85,9 @@ const Main = (props) => {
   const customIcon = (props) => {
     return <Icon name="star" onPress={signOut}></Icon>;
   };
-
+  const drawerIcon =(props)=>{
+    return <Icon name="menu" onPress={()=>props.navigation.navigate("DrawerMenu")}></Icon>
+  }
   const renderPosts = ({ item, index }) => {
     return (
       <Card
@@ -141,10 +143,12 @@ const Main = (props) => {
   ) : (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ backgroundColor: "#fce4ec" }}>
-        <Header
+        <Header 
+          containerStyle={{backgroundColor: "#fce4ec"}}
           leftComponent={{ icon: "menu", color: "#fff" }}
           centerComponent={{ text: "MY TITLE", style: { color: "#fff" } }}
           rightComponent={customIcon}
+          
         />
         <View>
           <ImgModal
@@ -176,6 +180,7 @@ const styles = {
       height: 300,
       margin: 7,
       borderRadius: 10,
+      padding:10
     },
     text: {
       fontSize: 15,

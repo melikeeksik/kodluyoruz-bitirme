@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import {SafeAreaView, Image, Text, Button, Alert, View} from "react-native"
+import {SafeAreaView, Image, Text, Button, Alert, View,StyleSheet,Dimensions} from "react-native"
 
 
 
@@ -78,28 +78,40 @@ const ImagesContainer = (props) => {
   }
 
   return(
-    <SafeAreaView >
-      <View style={{backgroundColor: '#fce4ec'}}>
-      <TouchableOpacity onPress = {pickPhoto}>
-        <Text>ilk burayı</Text>
-      </TouchableOpacity>
+    <SafeAreaView  >
+      <View style={{ paddingTop:60,paddingLeft:10,paddingRight:10 }}>
+      <Text style={{padding:10}}>Soru başlığı</Text>
+     
       <TextInput
-      placeholder="Başlık Buraya"
+      placeholder="Açılayıcı başlıklar daha dikkat çeker..."
       onChangeText={(text)=>setTitle(text)}
       value={title}
+      style={styles.AddProduct.ınput}
       />
+      <Text style={{padding:10}}>Detayları ekle</Text>
       <TextInput
-      placeholder="Tanım Burara"
+      placeholder="Ürün için alakalı bir detay gir..."
       onChangeText={(text)=>setDescription(text)}
       value={description}
+      style={styles.AddProduct.ınput}
+      
       />
+      <View style={{justifyContent:"center",alignItems:"center",padding:10}}>
+      <TouchableOpacity onPress = {pickPhoto} style={styles.AddProduct.buton}>
+       <Text style={{padding:10}}>GÖRSEL SEÇ</Text>
+      </TouchableOpacity>
+      
+      </View>
+      <View style={{justifyContent:"center",alignItems:"center",padding:10}}>
       <TouchableOpacity 
-      style={{margin:10}}
+      style={styles.AddProduct.buton}
+     
       onPress = {()=>{
         uploadInformations(userEmail,imageRef, description,title)
       }}>
-        <Text>sonra burayı</Text>
+        <Text>GÖNDER</Text>
       </TouchableOpacity>
+      </View>
 
       <Image
       style={{width:100,height:100}}
@@ -107,6 +119,21 @@ const ImagesContainer = (props) => {
       />
       </View>
     </SafeAreaView>
+  )
+}
+const styles ={
+  AddProduct : StyleSheet.create({
+    ınput : {borderBottomWidth:0.5,padding:10,margin:10},
+    buton:{
+      width:Dimensions.get("window").width/2,
+      backgroundColor:"#fce4ec",
+      height:40,
+      borderRadius:5,
+      justifyContent:"center",
+      alignItems:"center",
+
+    }
+  }
   )
 }
 

@@ -4,8 +4,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 
-import { Login, Signup,SplashScreen} from './Pages'
-import { Main, Profile,Messages,Blog,Forum,Signout, AddProducts} from "./Drawermenu";
+import { Login, Signup,SplashScreen,Comments, ProfilInformation, AddQuestion} from './Pages'
+import { Main, Profile,Blog,Forum ,AddProducts} from "./Drawermenu";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -13,9 +13,10 @@ function DrawerMenu() {
     return (
         <Drawer.Navigator initialRouteName="Main" >
           <Drawer.Screen name="Main" component={Main} options={{ headerShown: false}} />
-          <Drawer.Screen name="SignOut" component={Signout}/>
+          
+          
           <Drawer.Screen name="Profile" component={Profile} />
-          <Drawer.Screen name="Messages" component={Messages} />
+          
           <Drawer.Screen name="Forum" component={Forum} />
           <Drawer.Screen name="Blog" component={Blog} />
           <Drawer.Screen name="Add Products" component={AddProducts} />
@@ -31,7 +32,10 @@ function Router() {
             <Stack.Screen name="Splashscreen" component={SplashScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="Login" component={Login} options={{ headerShown: false, gestureEnabled: true }} />
                 <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false, gestureEnabled: true }} />
+                <Stack.Screen name="Comments" component={Comments} options={{ headerShown: false}} />
                 <Stack.Screen name="DrawerMenu" component={DrawerMenu} options={{ headerShown: false, gestureEnabled: false}} />
+                <Stack.Screen name="ProfilInformation" component={ProfilInformation} options={{ headerShown: false, gestureEnabled: false}} />
+                <Stack.Screen name="AddQuestion" component={AddQuestion} options={{ headerShown: false, gestureEnabled: false}} />
             </Stack.Navigator>
         </NavigationContainer>
     );
