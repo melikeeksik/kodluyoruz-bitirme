@@ -11,6 +11,7 @@ import {
   ProfilInformation,
   ProfileGuest,
   AddQuestion,
+  BlogDetail,
 } from './Pages';
 import {Main, Profile, Blog, Forum, AddProducts} from './Drawermenu';
 
@@ -75,6 +76,11 @@ function Router() {
         <Stack.Screen
           name="AddQuestion"
           component={AddQuestion}
+          options={{headerShown: false, gestureEnabled: true}}
+        />
+        <Stack.Screen
+          name="BlogDetail"
+          component={BlogDetail}
           options={{headerShown: false, gestureEnabled: true}}
         />
       </Stack.Navigator>

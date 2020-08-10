@@ -150,7 +150,7 @@ const Main = (props) => {
           rightComponent={customIcon}
         />
          <SearchBar onSearch={searchProduts} />
-      <View style={{ flex:1,backgroundColor: "#fce4ec" }}>
+      <View style={{ flex:1,backgroundColor: "#fce4ec",margin:20 }}>
         
         <View>
         <Dialog.Container visible={dialogVisible}>
