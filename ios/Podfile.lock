@@ -230,35 +230,35 @@ PODS:
     - React-Core (= 0.63.2)
     - React-jsi (= 0.63.2)
     - ReactCommon/turbomodule/core (= 0.63.2)
-  - Firebase/Auth (6.27.1):
+  - Firebase/Auth (6.28.1):
     - Firebase/CoreOnly
-    - FirebaseAuth (~> 6.6.0)
-  - Firebase/CoreOnly (6.27.1):
-    - FirebaseCore (= 6.8.1)
-  - Firebase/Database (6.27.1):
+    - FirebaseAuth (~> 6.7.0)
+  - Firebase/CoreOnly (6.28.1):
+    - FirebaseCore (= 6.9.1)
+  - Firebase/Database (6.28.1):
     - Firebase/CoreOnly
-    - FirebaseDatabase (~> 6.3.0)
-  - Firebase/Firestore (6.27.1):
+    - FirebaseDatabase (~> 6.4.0)
+  - Firebase/Firestore (6.28.1):
     - Firebase/CoreOnly
-    - FirebaseFirestore (~> 1.16.0)
-  - Firebase/Storage (6.27.1):
+    - FirebaseFirestore (~> 1.16.2)
+  - Firebase/Storage (6.28.1):
     - Firebase/CoreOnly
-    - FirebaseStorage (~> 3.7.0)
-  - FirebaseAuth (6.6.0):
+    - FirebaseStorage (~> 3.8.0)
+  - FirebaseAuth (6.7.1):
     - FirebaseCore (~> 6.8)
-    - GoogleUtilities/AppDelegateSwizzler (~> 6.5)
-    - GoogleUtilities/Environment (~> 6.5)
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.7)
+    - GoogleUtilities/Environment (~> 6.7)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseCore (6.8.1):
+  - FirebaseCore (6.9.1):
     - FirebaseCoreDiagnostics (~> 1.3)
-    - GoogleUtilities/Environment (~> 6.5)
-    - GoogleUtilities/Logger (~> 6.5)
+    - GoogleUtilities/Environment (~> 6.7)
+    - GoogleUtilities/Logger (~> 6.7)
   - FirebaseCoreDiagnostics (1.5.0):
     - GoogleDataTransport (~> 7.0)
     - GoogleUtilities/Environment (~> 6.7)
     - GoogleUtilities/Logger (~> 6.7)
     - nanopb (~> 1.30905.0)
-  - FirebaseDatabase (6.3.0):
+  - FirebaseDatabase (6.4.0):
     - FirebaseCore (~> 6.8)
     - leveldb-library (~> 1.22)
   - FirebaseFirestore (1.16.3):
@@ -273,7 +273,7 @@ PODS:
     - "gRPC-C++ (~> 1.28.0)"
     - leveldb-library (~> 1.22)
     - nanopb (~> 1.30905.0)
-  - FirebaseStorage (3.7.0):
+  - FirebaseStorage (3.8.0):
     - FirebaseCore (~> 6.8)
     - GTMSessionFetcher/Core (~> 1.1)
   - Flipper (0.41.5):
@@ -552,7 +552,7 @@ PODS:
   - React-jsinspector (0.63.2)
   - react-native-image-picker (2.3.3):
     - React
-  - react-native-safe-area-context (3.1.1):
+  - react-native-safe-area-context (3.1.4):
     - React
   - React-RCTActionSheet (0.63.2):
     - React-Core/RCTActionSheetHeaders (= 0.63.2)
@@ -618,32 +618,30 @@ PODS:
     - React
   - RNCMaskedView (0.1.10):
     - React
-  - RNFBApp (8.2.0):
-    - Firebase/CoreOnly (~> 6.27.0)
+  - RNFBApp (8.3.0):
+    - Firebase/CoreOnly (~> 6.28.1)
     - React
-  - RNFBAuth (8.2.0):
-    - Firebase/Auth (~> 6.27.0)
-    - React
-    - RNFBApp
-  - RNFBDatabase (7.3.2):
-    - Firebase/Database (~> 6.27.0)
+  - RNFBAuth (8.3.1):
+    - Firebase/Auth (~> 6.28.1)
     - React
     - RNFBApp
-  - RNFBFirestore (7.4.3):
-    - Firebase/Firestore (~> 6.27.0)
+  - RNFBDatabase (7.4.1):
+    - Firebase/Database (~> 6.28.1)
     - React
     - RNFBApp
-  - RNFBStorage (7.2.2):
-    - Firebase/Storage (~> 6.27.0)
+  - RNFBFirestore (7.5.1):
+    - Firebase/Firestore (~> 6.28.1)
+    - React
+    - RNFBApp
+  - RNFBStorage (7.3.1):
+    - Firebase/Storage (~> 6.28.1)
     - React
     - RNFBApp
   - RNGestureHandler (1.7.0):
     - React
-  - RNPermissions (2.1.5):
+  - RNReanimated (1.10.2):
     - React
-  - RNReanimated (1.10.1):
-    - React
-  - RNScreens (2.9.0):
+  - RNScreens (2.10.1):
     - React
   - RNVectorIcons (7.0.0):
     - React
@@ -708,7 +706,6 @@ DEPENDENCIES:
   - "RNFBFirestore (from `../node_modules/@react-native-firebase/firestore`)"
   - "RNFBStorage (from `../node_modules/@react-native-firebase/storage`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
-  - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
@@ -817,8 +814,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/storage"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
-  RNPermissions:
-    :path: "../node_modules/react-native-permissions"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -837,13 +832,13 @@ SPEC CHECKSUMS:
   DoubleConversion: cde416483dac037923206447da6e1454df403714
   FBLazyVector: 3ef4a7f62e7db01092f9d517d2ebc0d0677c4a37
   FBReactNativeSpec: dc7fa9088f0f2a998503a352b0554d69a4391c5a
-  Firebase: 919186c8e119dd9372a45fd1dd17a8a942bc1892
-  FirebaseAuth: b85c064e0ac60f82486728d50a4803f235687302
-  FirebaseCore: 8cd4f8ea22075e0ee582849b1cf79d8816506085
+  Firebase: ed042590caa0029392257529a8003c25ee82bc18
+  FirebaseAuth: a818d73466d51db897d3bf3c0f3baa3dae7fd4c0
+  FirebaseCore: 687b8e6a0a4337b898a6326d68254c2f80c143af
   FirebaseCoreDiagnostics: 7535fe695737f8c5b350584292a70b7f8ff0357b
-  FirebaseDatabase: 3d02ffa794ec174853c086cf87cf2dc79bd6da49
+  FirebaseDatabase: 55e69fe802ccb438d9c6ee51eb32fd425d5409d3
   FirebaseFirestore: 5ea7b0878363f9ec66bdcee0c29ad875d1b511ac
-  FirebaseStorage: af7bdbd12177cf567df00904e3e3a93704f25b15
+  FirebaseStorage: 3ef81ca5fa7817f85451ca09d516a34d2c7542a7
   Flipper: 33585e2d9810fe5528346be33bcf71b37bb7ae13
   Flipper-DoubleConversion: 38631e41ef4f9b12861c67d17cb5518d06badc41
   Flipper-Folly: c12092ea368353b58e992843a990a3225d4533c3
@@ -873,7 +868,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 8ca588cc921e70590820ce72b8789b02c67cce38
   React-jsinspector: b14e62ebe7a66e9231e9581279909f2fc3db6606
   react-native-image-picker: 3d3f85baabca60a00b75fb8facc1376db7bbdafa
-  react-native-safe-area-context: 344b969c45af3d8464d36e8dea264942992ef033
+  react-native-safe-area-context: eb91fe1fb3f7b87d9c30a7f0808407d8569d539d
   React-RCTActionSheet: 910163b6b09685a35c4ebbc52b66d1bfbbe39fc5
   React-RCTAnimation: 9a883bbe1e9d2e158d4fb53765ed64c8dc2200c6
   React-RCTBlob: 39cf0ece1927996c4466510e25d2105f67010e13
@@ -886,19 +881,18 @@ SPEC CHECKSUMS:
   ReactCommon: a0a1edbebcac5e91338371b72ffc66aa822792ce
   RNCAsyncStorage: d059c3ee71738c39834a627476322a5a8cd5bf36
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
-  RNFBApp: 6fd8a7e757135d4168bf033a8812c241af7363a0
-  RNFBAuth: 82b94c2f0a851be529a19f5fda2dffb390bfdd7f
-  RNFBDatabase: d9824d0305425f6ca344f341e48330a6f5ef3663
-  RNFBFirestore: 4004d6576846262c5a04e274c37a865ad59e162a
-  RNFBStorage: 420073c3d8026e5e09f83d47a7fcf1fed624108c
+  RNFBApp: d55b3a69d199cff25ecf4f3bf41a86c47aa37d57
+  RNFBAuth: 8cdec65b3c88e8f5b2aa0109d8cbfbaaa73fb379
+  RNFBDatabase: 2de49cc2b01698412b231b2e369af88c33465d73
+  RNFBFirestore: 85df763f15f97c0cc8ec0a429aaa18dc8196e386
+  RNFBStorage: ba5508aa4e1b92643c29ac52daf99f60e300a951
   RNGestureHandler: b6b359bb800ae399a9c8b27032bdbf7c18f08a08
-  RNPermissions: ad71dd4f767ec254f2cd57592fbee02afee75467
-  RNReanimated: c2bb7438b57a3d987bb2e4e6e4bca94787e30b02
-  RNScreens: c526239bbe0e957b988dacc8d75ac94ec9cb19da
+  RNReanimated: 7de2dca51deacff78bb880f63c1389a24311b376
+  RNScreens: b748efec66e095134c7166ca333b628cd7e6f3e2
   RNVectorIcons: da6fe858f5a65d7bbc3379540a889b0b12aa5976
   Yoga: 7740b94929bbacbddda59bf115b5317e9a161598
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 79dacb1def5e0fdb269b57b22d5e143191b8126e
+PODFILE CHECKSUM: e165772af901516d7d0926d6c0a306c287713566
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.0.beta.1

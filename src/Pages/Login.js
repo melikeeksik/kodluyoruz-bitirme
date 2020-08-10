@@ -1,10 +1,7 @@
 import React, {useState} from 'react';
 import {
   SafeAreaView,
-  Text,
   View,
-  TouchableOpacity,
-  Alert,
   StyleSheet,
   Dimensions,
   ImageBackground
@@ -47,7 +44,6 @@ const Login = (props) => {
       titleStyle={{
         fontSize: 30,
         fontWeight: "bold",
-        fontFamily: "lucida grande",
   
       }}
       title="AL GİTSİN">
@@ -62,6 +58,7 @@ const Login = (props) => {
        value={usermail}
        keyboardType="email-address"
        autoCapitalize="none"
+       autoFocus={true}
        
      />
 
@@ -93,21 +90,6 @@ const Login = (props) => {
     </ImageBackground>
   );
 };
-
-/*
-<TouchableOpacity
-            style={styles.Login.button}
-            
-            <Text style={{color:"#424242"}}>Giriş Yap</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.Login.button}
-            onPress={() => props.navigation.navigate('Signup')}>
-            <Text style={{color:"#424242"}}>Kayıt Ol</Text>
-          </TouchableOpacity>
-
-*/
 
 const styles ={
   Login : StyleSheet.create({

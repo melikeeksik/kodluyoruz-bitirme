@@ -14,7 +14,7 @@ const SearchBar = (props) => {
         margin:7
       }}
     >
-      <TextInput style={styles.textınput} onChangeText={props.onSearch} />
+      <TextInput style={styles.textinput} onChangeText={props.onSearch} />
      
      <Icon name="search"  />
      
@@ -23,13 +23,12 @@ const SearchBar = (props) => {
 };
 
 const styles = StyleSheet.create({
-  textınput: {
+  textinput: {
     width: Dimensions.get("window").width * 0.9,
     height: 30,
-
-    color: "#ffffff",
+    color: "black",
     margin: 7,
-    marginLeft: 7,
+    paddingLeft:10
   },
 });
 

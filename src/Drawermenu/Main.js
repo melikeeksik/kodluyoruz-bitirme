@@ -7,6 +7,7 @@ import {
   StyleSheet,
   ActivityIndicator,
   TouchableOpacity,
+  Dimensions
 } from "react-native";
 import auth from "@react-native-firebase/auth";
 import AsyncStorage from "@react-native-community/async-storage";
@@ -18,6 +19,8 @@ import { Card, Icon, Header } from "react-native-elements";
 import database from "@react-native-firebase/database";
 import storage from "@react-native-firebase/storage";
 import { openComposer } from "react-native-email-link";
+import Dialog from "react-native-dialog";
+
 
 const Main = (props) => {
   const [products, setProducts] = useState([]);
@@ -25,6 +28,7 @@ const Main = (props) => {
   const [cpProducts, setcpProducts] = useState([]);
   const [modalShow, setModalShow] = useState(false);
   const [modalUrl, setModalUrl] = useState("");
+  const [dialogVisible, setDialogVisible] = useState(false)
 
   useEffect(() => {
     fecthProducts();
@@ -59,7 +63,6 @@ const Main = (props) => {
   };
 
   function sendMail(index) {
-    console.log(products[index].userEmail);
     openComposer({
       to: products[index].userEmail,
       subject: "Pets uygulamasındaki ürününüz için",
@@ -72,6 +75,7 @@ const Main = (props) => {
     props.navigation.navigate("Login");
     AsyncStorage.removeItem("@USER_ID");
   };
+  
 
   const searchProduts = (text) => {
     let filteredList = cpProducts.filter(({ description }) => {
@@ -82,12 +86,10 @@ const Main = (props) => {
 
     setProducts(filteredList);
   };
+ 
   const customIcon = (props) => {
-    return <Icon name="star" onPress={signOut}></Icon>;
+    return <Icon name="exit-to-app" onPress={()=>{setDialogVisible(true)}}></Icon>;
   };
-  const drawerIcon =(props)=>{
-    return <Icon name="menu" onPress={()=>props.navigation.navigate("DrawerMenu")}></Icon>
-  }
   const renderPosts = ({ item, index }) => {
     return (
       <Card
@@ -124,7 +126,7 @@ const Main = (props) => {
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
-            <Text>{item.description}</Text>
+            <Text numberOfLines={5} style={styles.Post.text}>  {item.description}</Text>
             <Icon
               name="mail"
               color="#0e0e0e"
@@ -141,25 +143,35 @@ const Main = (props) => {
   return isLoading ? (
     <ActivityIndicator />
   ) : (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={{ backgroundColor: "#fce4ec" }}>
-        <Header 
-          containerStyle={{backgroundColor: "#fce4ec"}}
-          leftComponent={{ icon: "menu", color: "#fff" }}
-          centerComponent={{ text: "MY TITLE", style: { color: "#fff" } }}
+    <SafeAreaView style={{ flex: 1,backgroundColor: "#fce4ff" }}>
+      <Header 
+          containerStyle={{backgroundColor: "#fce4ff"}}
+          centerComponent={{ text: "ANASAYFA", style: { color: "black", fontWeight:"bold",fontSize:25 } }}
           rightComponent={customIcon}
-          
         />
+         <SearchBar onSearch={searchProduts} />
+      <View style={{ flex:1,backgroundColor: "#fce4ec" }}>
+        
         <View>
+        <Dialog.Container visible={dialogVisible}>
+          <Dialog.Title>Çıkış</Dialog.Title>
+          <Dialog.Description>
+            Uygulamadan çıkmak istediğinize emin misiniz?
+          </Dialog.Description>
+          <Dialog.Button label="Hayır" onPress={()=>{setDialogVisible(false)}} />
+          <Dialog.Button label="Evet" onPress={()=>{
+            setDialogVisible(false)
+            signOut()
+          }} />
+        </Dialog.Container>
           <ImgModal
             imgUrl={modalUrl}
             visible={modalShow}
             onPress={() => {
-              console.log(">@@@@@<");
               setModalShow(false);
             }}
           />
-          <SearchBar onSearch={searchProduts} />
+         
 
           <FlatList
             keyExtractor={(_, index) => index.toString()}
@@ -177,14 +189,16 @@ const Main = (props) => {
 const styles = {
   Post: StyleSheet.create({
     container: {
-      height: 300,
+      height: 350,
       margin: 7,
       borderRadius: 10,
       padding:10
     },
     text: {
       fontSize: 15,
-      fontWeight: "bold",
+      fontWeight: 'bold',
+      width:Dimensions.get("screen").width*0.7,
+      alignSelf:"flex-start"
     },
     title: {
       fontSize: 15,

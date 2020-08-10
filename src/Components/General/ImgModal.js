@@ -8,7 +8,7 @@ const ImgModal = (props) => {
       <Modal animationType="fade" visible={props.visible}>
         <Icon 
         containerStyle={{marginLeft:5,alignSelf:"flex-end"}}
-        iconStyle={{height:30,width:30}}
+        iconStyle={{height:30,width:30, marginTop:50,marginRight:20}}
         name="close"
         onPress={props.onPress}
         />

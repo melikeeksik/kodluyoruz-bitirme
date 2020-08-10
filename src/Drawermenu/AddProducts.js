@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react'
+import React from 'react'
 import { SafeAreaView, Text, View } from "react-native";
 
 import { ImagesContainer } from "../Components/AddProducts";
@@ -6,10 +6,9 @@ import { ImagesContainer } from "../Components/AddProducts";
 const AddProducts = (props)=>{
   
     return(
-        <SafeAreaView style={{flex:1,justifyContent:'center'}}>
-            <View>
+        <SafeAreaView style={{flex:1, alignItems:'center',backgroundColor: "#fce4ff"}}>
+            
             <ImagesContainer/>
-            </View>
         </SafeAreaView>
     )
 }

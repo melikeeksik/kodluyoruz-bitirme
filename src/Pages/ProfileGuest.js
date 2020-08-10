@@ -1,30 +1,39 @@
-import React from 'react';
 import {
   SafeAreaView,
-  View,
-  Text,
-  FlatList,
   StyleSheet,
-  Button,
+  View,
+  FlatList,
+  ActivityIndicator,
+  TouchableOpacity,
+  Text,
+  Dimensions,
 } from 'react-native';
-import {Card} from 'react-native-elements';
+import React, {useState, useEffect} from 'react';
+
+import storage from '@react-native-firebase/storage';
 
 import database from '@react-native-firebase/database';
-import storage from '@react-native-firebase/storage';
-import auth from '@react-native-firebase/auth';
+
+import {Divider, Card} from 'react-native-elements';
+import {HeaderView} from '../Components/ProfilePage/HeaderView';
 
 const ProfileGuest = (props) => {
-  const clickedUser = props.route.params.clickedUser;
-  const [posts, setPosts] = React.useState([]);
-  const [user, setUser] = React.useState({
+  const [myPost, setMyPost] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser] = useState({
     name: 'Kullanıcı',
     surname: 'Kullanıcı',
+    imageRef:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSaJYuY-73ZNnqxSZ5VMAKYhkwqd3y9hg76sQ&usqp=CAU',
   });
+  const clickedUser = props.route.params.clickedUser;
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchData();
   }, []);
+
   const fetchData = () => {
+    setIsLoading(true);
     database()
       .ref('/products')
       .on('value', (snapshots) => {
@@ -41,28 +50,36 @@ const ProfileGuest = (props) => {
                   description: snap.val().description,
                   title: snap.val().title,
                 });
-                setPosts(cpArray);
+                setMyPost(cpArray);
               })
               .catch((e) => {
                 console.log(e);
               });
           }
         });
-        database()
-          .ref('users/')
-          .on('value', (snapshots) => {
-            snapshots.forEach((snap) => {
-              if (snap.val().email === clickedUser) {
-                setUser({
-                  name: snap.val().name,
-                  surname: snap.val().surname,
-                });
-              }
-            });
-          });
       });
-  };
+    database()
+      .ref(`users/`)
+      .on('value', (snapshots) => {
+        snapshots.forEach((snapshot) => {
+          if (clickedUser === snapshot.val().email) {
+            if (snapshot.val().name != null && snapshot.val().surname != null) {
+              const ref = storage().ref(`${snapshot.val().profileImgRef}`);
+              console.log(snapshot.val().profileImgRef);
+              ref.getDownloadURL().then((url) => {
+                setUser({
+                  name: snapshot.val().name,
+                  surname: snapshot.val().surname,
+                  imageRef: url,
+                });
+              });
+            }
+          }
+        });
+      });
 
+    setIsLoading(false);
+  };
   const renderCards = ({item}) => {
     return (
       <Card
@@ -71,36 +88,60 @@ const ProfileGuest = (props) => {
         titleStyle={stlyes.title}
         image={{uri: item.imageRef}}
         imageStyle={{resizeMode: 'contain'}}>
-        <Text style={stlyes.text}>{item.userEmail}</Text>
-        <Text style={{marginBottom: 10}}>{item.description}</Text>
+        <View
+          style={{
+            marginTop: 15,
+            justifyContent: 'space-evenly',
+            flexDirection: 'row',
+          }}>
+          <Text numberOfLines={5} style={stlyes.text}>
+            {item.description}
+          </Text>
+        </View>
       </Card>
     );
   };
-  return (
-    <SafeAreaView>
-      <View style={{marginVertical: 20}}>
-        <Text>{user.name}</Text>
-        <Text>{user.surname}</Text>
+  const goProfilInfo = () => {
+    props.navigation.navigate('ProfilInformation');
+  };
+  return isLoading ? (
+    <ActivityIndicator />
+  ) : (
+    <SafeAreaView style={{flex: 1, backgroundColor: '#fce4ff'}}>
+      <View style={{marginTop: 50, marginHorizontal: 10, marginBottom: 30}}>
+        <HeaderView
+          userName={user.name}
+          userSurname={user.surname}
+          profileImg={user.imageRef}
+          onPress={goProfilInfo}
+          buttonVisible={false}
+        />
       </View>
-      <FlatList
-        keyExtractor={(index) => index.toString()}
-        data={posts}
-        renderItem={renderCards}
+      <Divider
+        style={{
+          backgroundColor: 'gray',
+          height: 5,
+          marginHorizontal: 10,
+          borderRadius: 5,
+        }}
       />
+
+      <View style={{flex: 1, backgroundColor: '#fce4ec'}}>
+        <FlatList
+          keyExtractor={(_, index) => index.toString()}
+          data={myPost}
+          renderItem={renderCards}
+          refreshing={isLoading}
+          onRefresh={fetchData}
+        />
+      </View>
     </SafeAreaView>
   );
 };
 
 const stlyes = StyleSheet.create({
-  profileHead: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 10,
-    margin: 40,
-  },
-
   container: {
+    flex: 1,
     height: 300,
     margin: 7,
     borderRadius: 10,
@@ -109,6 +150,7 @@ const stlyes = StyleSheet.create({
   text: {
     fontSize: 15,
     fontWeight: 'bold',
+    width: Dimensions.get('screen').width * 0.7,
   },
   title: {
     fontSize: 15,

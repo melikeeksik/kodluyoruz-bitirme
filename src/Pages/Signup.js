@@ -8,7 +8,6 @@ import {
   Dimensions,
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
-import database from '@react-native-firebase/database';
 
 import {Input, Button, Card} from 'react-native-elements';
 
