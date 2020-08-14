@@ -28,7 +28,6 @@ const Login = (props) => {
       props.navigation.navigate('DrawerMenu');
       AsyncStorage.setItem('@USER_ID', auth().currentUser.uid);
     } catch (error) {
-      console.log(error);
       Alert.alert('MyApp', 'Bir hata oluştu.');
     }
   };

@@ -12,7 +12,7 @@ const BlogDetail = (props) => {
         <Divider style={{margin:10,height:5}}/>
         <Image
           source={{uri: blog.imageUrl}}
-          style={{width: 275, height: 275, marginTop:50, resizeMode:"cover" ,marginLeft:Dimensions.get("window").width*0.1}}
+          style={{width: 275, height: 150, marginTop:50, resizeMode:"cover" ,marginLeft:Dimensions.get("window").width*0.1}}
           PlaceholderContent={<ActivityIndicator />}
         />
         

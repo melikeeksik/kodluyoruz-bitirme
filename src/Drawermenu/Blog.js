@@ -12,11 +12,14 @@ import database from '@react-native-firebase/database';
 
 const Blog = (props) => {
   const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     fetchBlog();
   }, []);
 
   const fetchBlog = () => {
+    setIsLoading(true)
     database()
       .ref('blog')
       .on('value', (snapshots) => {
@@ -29,8 +32,8 @@ const Blog = (props) => {
           });
         });
         setPosts(dummyArray);
-        console.log(dummyArray);
       });
+      setIsLoading(false)
   };
 
   const renderPosts = ({item}) => {
@@ -64,6 +67,8 @@ const Blog = (props) => {
           keyExtractor={(_, index) => index.toString()}
           data={posts}
           renderItem={renderPosts}
+          refreshing={isLoading}
+          onRefresh={fetchBlog}
         />
       </View>
     </SafeAreaView>

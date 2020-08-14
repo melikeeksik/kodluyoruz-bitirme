@@ -51,7 +51,6 @@ const Signup = (props) => {
           titleStyle={{
             fontSize: 30,
             fontWeight: 'bold',
-            fontFamily: 'lucida grande',
           }}
           title="AL GİTSİN">
           <View>
@@ -78,7 +77,7 @@ const Signup = (props) => {
             <Input
               leftIcon={{name: 'lock'}}
               style={styles.Login.input}
-              placeholder="Şifrenizi giriniz.."
+              placeholder="Şifrenizi tekrar giriniz.."
               placeholderTextColor="#424242"
               onChangeText={setPassRep}
               value={userpassRep}

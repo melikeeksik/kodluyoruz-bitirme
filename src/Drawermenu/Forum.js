@@ -9,7 +9,7 @@ import {
   View,
   Image,
 } from 'react-native';
-import {Icon, Divider} from 'react-native-elements';
+import {Icon} from 'react-native-elements';
 import firestore from '@react-native-firebase/firestore';
 
 const Forum = (props) => {
@@ -48,7 +48,7 @@ const Forum = (props) => {
             <View style={styles.Forum.container}>
               <View>
               <Text style={styles.Forum.title}>{item.enrtyTitle}</Text>
-              <Text style={styles.Forum.text}>{item.entryDescription}</Text>
+              <Text  style={styles.Forum.text}>{item.entryDescription}</Text>
               </View>
               <TouchableOpacity
                 style={{flexDirection: 'row', justifyContent: 'flex-end'}}
@@ -83,7 +83,7 @@ const Forum = (props) => {
             color: 'white',
           }}
           containerStyle={{
-            backgroundColor: 'blue',
+            backgroundColor: 'black',
             opacity: 0.9,
             position: 'absolute',
             right: 30,
@@ -122,6 +122,8 @@ const styles = {
     text: {
       marginVertical:20,
       fontSize: 20,
+      letterSpacing:2
+      
     },
     textınput: {
       backgroundColor: 'rgba(255, 255, 255, 0.4)',

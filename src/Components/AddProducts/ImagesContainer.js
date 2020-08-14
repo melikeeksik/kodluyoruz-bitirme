@@ -115,7 +115,7 @@ const ImagesContainer = (props) => {
       <View>
         <Text style={{padding: 10, fontSize:20,alignSelf:"center"}}>Detayları ekle</Text>
         <Input
-        maxLength={50}
+        maxLength={100}
           numberOfLines={5}
           multiline={true}
           placeholder="Ürün için alakalı bir detay gir..."

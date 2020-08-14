@@ -63,7 +63,6 @@ const Profile = (props) => {
                       const ref = storage().ref(
                         `${snapshot.val().profileImgRef}`,
                       );
-                      console.log(snapshot.val().profileImgRef);
                       ref.getDownloadURL().then((url) => {
                         setUser({
                           name: snapshot.val().name,
@@ -111,7 +110,7 @@ const Profile = (props) => {
     <ActivityIndicator />
   ) : (
     <SafeAreaView style={{flex: 1, backgroundColor: '#fce4ff'}}>
-      <View style={{marginTop: 50, marginHorizontal: 10, marginBottom: 30}}>
+      <View style={{marginVertical:5, marginHorizontal: 10, marginBottom: 30, height:85}}>
         <HeaderView
           userName={user.name}
           userSurname={user.surname}

@@ -65,7 +65,7 @@ const Main = (props) => {
   function sendMail(index) {
     openComposer({
       to: products[index].userEmail,
-      subject: "Pets uygulamasındaki ürününüz için",
+      subject: "Al Gitsinn uygulamasındaki ürününüz için",
       body: "",
     });
   }
@@ -128,6 +128,7 @@ const Main = (props) => {
           >
             <Text numberOfLines={5} style={styles.Post.text}>  {item.description}</Text>
             <Icon
+              iconStyle={{alignSelf:"center"}}
               name="mail"
               color="#0e0e0e"
               onPress={() => {

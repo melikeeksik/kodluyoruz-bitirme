@@ -108,7 +108,7 @@ const ProfileGuest = (props) => {
     <ActivityIndicator />
   ) : (
     <SafeAreaView style={{flex: 1, backgroundColor: '#fce4ff'}}>
-      <View style={{marginTop: 50, marginHorizontal: 10, marginBottom: 30}}>
+      <View style={{marginTop: 50, marginHorizontal: 10, marginBottom: 30,height:85}}>
         <HeaderView
           userName={user.name}
           userSurname={user.surname}

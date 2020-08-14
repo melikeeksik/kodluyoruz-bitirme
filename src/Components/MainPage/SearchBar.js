@@ -16,7 +16,8 @@ const SearchBar = (props) => {
     >
       <TextInput style={styles.textinput} onChangeText={props.onSearch} />
      
-     <Icon name="search"  />
+     <Icon name="search"  
+     iconStyle={{marginRight:20}}/>
      
     </View>
   );
